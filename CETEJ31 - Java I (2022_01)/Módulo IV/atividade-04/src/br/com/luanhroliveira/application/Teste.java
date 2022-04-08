@@ -2,17 +2,16 @@ package br.com.luanhroliveira.application;
 
 import br.com.luanhroliveira.entity.Carga;
 import br.com.luanhroliveira.entity.Passeio;
+import br.com.luanhroliveira.services.Leitura;
 import br.com.luanhroliveira.services.VeiculoService;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
-import java.util.Scanner;
 
 public class Teste {
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
 
         VeiculoService veiculoService = new VeiculoService();
 
@@ -30,39 +29,37 @@ public class Teste {
             System.out.println("5. Imprimir Veículo de Passeio pela Placa");
             System.out.println("6. Imprimir Veículo de Carga pela Placa");
             System.out.println("7. Sair do Sistema \n");
-            System.out.print("Digite: ");
 
             try {
-                int acao = sc.nextInt();
+                int acao = Integer.parseInt(Leitura.entDados("Digite: "));
                 switch (acao) {
                     case 1:
-                        veiculoService.adicionarNovoVeiculoDePasseioALista(passeios, sc);
-                        System.out.println("Veículo de passeio cadastrado com sucesso!");
+                        System.out.println(veiculoService.adicionarNovoVeiculoDePasseioALista(passeios));
+                        System.out.println();
                         break;
                     case 2:
-                        veiculoService.adicionarNovoVeiculoDeCargaALista(cargas, sc);
-                        System.out.println("Veículo de carga cadastrado com sucesso!");
+                        System.out.println(veiculoService.adicionarNovoVeiculoDeCargaALista(cargas));
+                        System.out.println();
                         break;
                     case 3:
-                        veiculoService.listarVeiculosDePasseio(passeios);
+                        System.out.println(veiculoService.listarVeiculosDePasseio(passeios));
                         System.out.println();
                         break;
                     case 4:
-                        veiculoService.listarVeiculosDeCarga(cargas);
+                        System.out.println(veiculoService.listarVeiculosDeCarga(cargas));
                         System.out.println();
                         break;
                     case 5:
-                        veiculoService.listarVeiculoDePasseioPorPlaca(passeios, sc);
+                        System.out.println(veiculoService.listarVeiculoDePasseioPorPlaca(passeios));
                         System.out.println();
                         break;
                     case 6:
-                        veiculoService.listarVeiculoDeCargaPorPlaca(cargas, sc);
+                        System.out.println(veiculoService.listarVeiculoDeCargaPorPlaca(cargas));
                         System.out.println();
                         break;
                     case 7:
                         System.out.println("Finalizando...");
                         exit = true;
-                        sc.close();
                         break;
                     default:
                         System.out.println("Opção inválida, tente novamente! \n");
@@ -70,7 +67,6 @@ public class Teste {
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Entrada de dados inválida!\nVerifique o tipo de dado que está inserindo.");
-                sc.nextLine();
             }
         }
     }
