@@ -4,6 +4,7 @@ import br.com.luanhroliveira.entity.Carga;
 import br.com.luanhroliveira.entity.Passeio;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class VeiculoService {
 
@@ -36,7 +37,7 @@ public class VeiculoService {
 
             veiculoList.add(passeio);
 
-            exit = Leitura.entDados("Veículo adicionado com sucesso! Deseja cadastrar um novo veículo?(S/N): ").equals("S");
+            exit = Leitura.entDados("Veículo adicionado com sucesso! Deseja cadastrar um novo veículo?(S/N): ").equals("N");
         }
         return "Veículo de passeio cadastrado com sucesso! ";
     }
@@ -71,42 +72,46 @@ public class VeiculoService {
 
             veiculoList.add(carga);
 
-            exit = Leitura.entDados("Veículo adicionado com sucesso! Deseja cadastrar um novo veículo?(S/N): ").equals("S");
+            exit = Leitura.entDados("Veículo adicionado com sucesso! Deseja cadastrar um novo veículo?(S/N): ").equals("N");
         }
         return "Veículo(s) de carga cadastrado(s) com sucesso! ";
     }
 
-    public String listarVeiculosDePasseio(List<Passeio> veiculoList) {
+    public Object listarVeiculosDePasseio(List<Passeio> veiculoList) {
         if (veiculoList.isEmpty()) {
             return "Não existem veículos cadastrados.";
         }
 
-        return veiculoList.stream().map(Passeio::toString).toString();
+        return veiculoList.stream()
+            .map(Passeio::toString)
+            .collect(Collectors.toList());
     }
 
-    public String listarVeiculosDeCarga(List<Carga> veiculoList) {
+    public Object listarVeiculosDeCarga(List<Carga> veiculoList) {
         if (veiculoList.isEmpty()) {
             return "Não existem veículos cadastrados.";
         }
 
-        return veiculoList.stream().map(Carga::toString).toString();
+        return veiculoList.stream()
+            .map(Carga::toString)
+            .collect(Collectors.toList());
     }
 
-    public String listarVeiculoDePasseioPorPlaca(List<Passeio> passeios) {
+    public Object listarVeiculoDePasseioPorPlaca(List<Passeio> passeios) {
         String placa = Leitura.entDados("Digite a placa do veículo: ");
         return
             passeios.stream()
                 .filter(passeio -> passeio.getPlaca().equals(placa))
                 .map(Passeio::toString)
-                .toString();
+                .collect(Collectors.toList());
     }
 
-    public String listarVeiculoDeCargaPorPlaca(List<Carga> cargas) {
+    public Object listarVeiculoDeCargaPorPlaca(List<Carga> cargas) {
         String placa = Leitura.entDados("Digite a placa do veículo: ");
         return
             cargas.stream()
                 .filter(carga -> carga.getPlaca().equals(placa))
                 .map(Carga::toString)
-                .toString();
+                .collect(Collectors.toList());
     }
 }

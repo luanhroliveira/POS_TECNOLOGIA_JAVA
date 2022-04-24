@@ -4,11 +4,10 @@ import java.util.Scanner;
 
 public class Leitura {
 
+    private static final Scanner sc = new Scanner(System.in);
+
     public static String entDados(String entDados) {
-        Scanner sc = new Scanner(System.in);
         System.out.println(entDados);
-        String saidaDados = sc.nextLine();
-        sc.close();
-        return saidaDados;
+        return sc.nextLine();
     }
 }
