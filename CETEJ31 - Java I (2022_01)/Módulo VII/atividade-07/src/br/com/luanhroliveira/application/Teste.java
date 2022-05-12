@@ -21,8 +21,8 @@ public class Teste {
             System.out.println("4. Imprimir Todos os Veículos de Carga");
             System.out.println("5. Imprimir Veículo de Passeio pela Placa");
             System.out.println("6. Imprimir Veículo de Carga pela Placa");
-            System.out.println("7. Imprimir Veículo de Carga pela Placa");
-            System.out.println("8. Imprimir Veículo de Carga pela Placa");
+            System.out.println("7. Excluir Veículo de Passeio pela Placa");
+            System.out.println("8. Excluir Veículo de Carga pela Placa");
             System.out.println("9. Sair do Sistema \n");
 
             try {
