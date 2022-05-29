@@ -1,7 +1,6 @@
 package br.com.luanhroliveira.entity;
 
 import br.com.luanhroliveira.exceptions.VelocException;
-import lombok.Builder;
 
 public abstract class Veiculo {
     private String placa;
