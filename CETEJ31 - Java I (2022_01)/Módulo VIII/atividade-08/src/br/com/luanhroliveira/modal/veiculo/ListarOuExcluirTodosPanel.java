@@ -14,7 +14,6 @@ public class ListarOuExcluirTodosPanel extends JFrame implements ActionListener 
 
     private VeiculoType veiculoType;
 
-    private final JFrame jFrame = new JFrame();
     private final JPanel jPanel = new JPanel();
     private final JTable jTable = new JTable();
     private final JScrollPane jScrollPane = new JScrollPane();
@@ -33,10 +32,6 @@ public class ListarOuExcluirTodosPanel extends JFrame implements ActionListener 
 
     private void setVeiculoType(VeiculoType veiculoType) {
         this.veiculoType = veiculoType;
-    }
-
-    private JFrame getjFrame() {
-        return this.jFrame;
     }
 
     private JPanel getjPanel() {
@@ -183,7 +178,7 @@ public class ListarOuExcluirTodosPanel extends JFrame implements ActionListener 
         } else if (act.getSource().equals(this.getBtExcluirTodos())) {
             this.excluirTodosVeiculo();
         } else if (act.getSource().equals(this.getBtSair())) {
-            this.getjFrame().dispose();
+            super.dispose();
         }
     }
 
