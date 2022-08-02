@@ -5,6 +5,9 @@ import br.com.luanhroliveira.atividade05.repositories.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,4 +48,13 @@ public class DepartmentService {
         return this.departmentRepository.findByName(departmentName);
     }
 
+    public Page<Department> departmentPage(
+        final Integer page,
+        final Integer size,
+        final Sort.Direction direction,
+        final String field
+    ) {
+        PageRequest pageRequest = PageRequest.of(page, size, direction, field);
+        return this.departmentRepository.findAll(pageRequest);
+    }
 }
