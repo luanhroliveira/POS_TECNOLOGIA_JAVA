@@ -10,8 +10,8 @@ import java.util.concurrent.ThreadLocalRandom;
 public class RaceApplication {
 
     //PARAMETERS
-    private static final Integer LAPS = 10;
-    private static final Integer NUMBER_OF_COMPETITORS = 10;
+    private static Integer laps = 10;
+    private static Integer numberOfCompetitors = 10;
 
     private final Map<String, Long> data = new HashMap<>();
     private final Map<String, Integer> lapCounterPerCompetitor = new HashMap<>();
@@ -20,9 +20,16 @@ public class RaceApplication {
     public RaceApplication() throws InterruptedException {
         System.out.println("Preparing race...");
 
+        if (getLaps() < 10) {
+            setLaps(10);
+        }
+        if (getNumberOfCompetitors() < 10) {
+            setNumberOfCompetitors(10);
+        }
+
         final var threads = new ArrayList<Thread>();
 
-        for (int i = 1; i <= NUMBER_OF_COMPETITORS; i++) {
+        for (int i = 1; i <= getNumberOfCompetitors(); i++) {
             final var competitorName = "Competitor #" + i;
 
             this.getLapCounterPerCompetitor().put(competitorName, 0);
@@ -116,6 +123,22 @@ public class RaceApplication {
         this.competitors.add(competitor);
     }
 
+    public static Integer getLaps() {
+        return laps;
+    }
+
+    public static void setLaps(Integer laps) {
+        RaceApplication.laps = laps;
+    }
+
+    public static Integer getNumberOfCompetitors() {
+        return numberOfCompetitors;
+    }
+
+    public static void setNumberOfCompetitors(Integer numberOfCompetitors) {
+        RaceApplication.numberOfCompetitors = numberOfCompetitors;
+    }
+
     class CompetitorThread extends Thread {
         private Thread thread;
 
@@ -129,7 +152,7 @@ public class RaceApplication {
             System.out.println("Starting Thread: " + this.getThread().getName());
 
             try {
-                for (int i = 1; i <= LAPS; i++) {
+                for (int i = 1; i <= laps; i++) {
                     System.out.println(this.getThread().getName() + " lap: " + i);
 
                     Thread.sleep(ThreadLocalRandom.current().nextInt(10, 10000));
