@@ -8,6 +8,8 @@ import org.hibernate.Hibernate;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.Entity;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -20,6 +22,17 @@ import java.util.Objects;
 @AllArgsConstructor
 @Entity
 @Table(name = "employee")
+@NamedQuery(
+    name = "Employee.byNumberDependent",
+    query = "select e " +
+        "from Employee e " +
+        "where e.numberDependent = ?1")
+@NamedNativeQuery(
+    name = "Employee.byName",
+    query = "select * " +
+        "from employee e " +
+        "where e.name like ?1",
+    resultClass = Employee.class)
 public class Employee extends AbstractPersistable<Long> implements Serializable {
 
     private String name;
