@@ -107,4 +107,24 @@ public class EmployeeService {
     public List<Employee> findAllByNameContaining(final String name) {
         return this.employeeRepository.findAllByNameContaining(name);
     }
+
+    @Transactional
+    public void deleteAllByDepartmentId(final Long departmentId) {
+        this.employeeRepository.deleteAllByDepartment(departmentId);
+    }
+
+    @Transactional
+    public void updateAllDepartmentFromTo(final Long fromDepartment, final Long toDepartment) {
+        this.employeeRepository.updateEveryoneDepartmentFromTo(fromDepartment, toDepartment);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Employee> findAllByDepartmentId(final Long departmentId) {
+        return this.employeeRepository.findAllByDepartmentId(departmentId);
+    }
+
+    @Transactional
+    public void updateAllWageByPercentage(final Integer percentage) {
+        this.employeeRepository.updateAllWageByPercentage(percentage);
+    }
 }

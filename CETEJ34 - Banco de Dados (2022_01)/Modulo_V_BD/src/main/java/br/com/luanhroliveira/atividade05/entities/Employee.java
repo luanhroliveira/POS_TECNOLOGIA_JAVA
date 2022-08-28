@@ -10,7 +10,10 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 import javax.persistence.Entity;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQuery;
+import javax.persistence.NamedStoredProcedureQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -33,6 +36,17 @@ import java.util.Objects;
         "from employee e " +
         "where e.name like ?1",
     resultClass = Employee.class)
+@NamedStoredProcedureQuery(
+    name = "Employee.increasesRemuneration",
+    procedureName = "salary_increases_for_all_employees",
+    parameters = {
+        @StoredProcedureParameter(
+            mode = ParameterMode.IN,
+            name = "percentage",
+            type = Integer.class
+        )
+    }
+)
 public class Employee extends AbstractPersistable<Long> implements Serializable {
 
     private String name;
