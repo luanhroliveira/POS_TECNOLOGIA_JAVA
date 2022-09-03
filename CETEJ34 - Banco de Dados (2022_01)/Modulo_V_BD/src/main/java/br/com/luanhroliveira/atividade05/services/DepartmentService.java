@@ -1,6 +1,7 @@
 package br.com.luanhroliveira.atividade05.services;
 
 import br.com.luanhroliveira.atividade05.entities.Department;
+import br.com.luanhroliveira.atividade05.entities.Employee;
 import br.com.luanhroliveira.atividade05.repositories.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +20,9 @@ public class DepartmentService {
 
     @Autowired
     private DepartmentRepository departmentRepository;
+
+    @Autowired
+    private EmployeeService employeeService;
 
     public Department save(Department department) {
         return this.departmentRepository.save(department);
@@ -56,5 +61,15 @@ public class DepartmentService {
     ) {
         PageRequest pageRequest = PageRequest.of(page, size, direction, field);
         return this.departmentRepository.findAll(pageRequest);
+    }
+
+    @Transactional
+    public void saveDepartmentAndEmployee(
+        final Department department,
+        final Employee employee
+    ) {
+        this.departmentRepository.save(department);
+        employee.setDepartment(department);
+        this.employeeService.save(employee);
     }
 }
