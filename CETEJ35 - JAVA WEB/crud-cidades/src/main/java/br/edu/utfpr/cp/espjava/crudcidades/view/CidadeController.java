@@ -21,12 +21,6 @@ public class CidadeController {
     @GetMapping("/")
     public String listar(Model memoria) {
 
-//        var cidades = Set.of(
-//            new Cidade("Cornélio Procópio","PR"),
-//            new Cidade("Assis","SP"),
-//            new Cidade("Itajaí","SC")
-//        );
-
         memoria.addAttribute("listaCidades", this.cidades);
 
         return "/crud";
