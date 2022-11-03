@@ -104,7 +104,7 @@ public class CidadeController {
         cidadeAtual.ifPresent(cidadeEntity -> {
             cidadeEntity.setNome(cidade.getNome());
             cidadeEntity.setEstado(cidade.getEstado());
-            this.repository.saveAndFlush(cidadeAtual.get());
+            this.repository.saveAndFlush(cidadeEntity);
         });
 
         return "redirect:/";
